@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({products, bannerData}) {
   return (
-    <div className="p-5">
+    <div className="p-3">
       <HeroBanner
         bannerData={bannerData && bannerData[0]}
       ></HeroBanner>
