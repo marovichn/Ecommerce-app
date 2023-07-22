@@ -1,9 +1,13 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import {AiOutlineShopping} from "react-icons/ai"
 import Cart from './Cart';
 import Link from 'next/link';
 
 const Navbar = () => {
+const [showCart, setShowCart]=useState(false);
+
   return (
     <div className='navbar-container'>
       <p className='logo'>
@@ -13,13 +17,13 @@ const Navbar = () => {
       <button
         type='button'
         className='cart-icon'
-        onClick={() => {}/* setShowCart(true) */}
+        onClick={() =>setShowCart(prev=>!prev)}
       >
         <AiOutlineShopping />
         <span className='cart-item-qty -mt-3'>0</span>
       </button>
 
-      {/* {showCart && <Cart />} */}
+      {showCart && <Cart />}
     </div>
   );
 }
