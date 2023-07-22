@@ -1,6 +1,6 @@
 import { client, urlFor } from "@/lib/client";
 import Product from "@/components/Product";
-import React from "react";
+import React, { useState } from "react";
 import {
   AiFillStar,
   AiOutlineMinus,
@@ -44,7 +44,8 @@ export async function getStaticProps(context) {
 
 const page = ({ product, products }) => {
   const { image, name, details, price } = product;
-  const index = 0;
+  const [index, setIndex]=useState(0);
+
 
   return (<div>
       <div className="product-detail-container">
@@ -58,7 +59,7 @@ const page = ({ product, products }) => {
                 key={i}
                 src={urlFor(item)}
                 className={i === index ? 'small-image selected-image' : 'small-image'}
-                onMouseEnter={()=>{}}
+                onMouseEnter={()=>setIndex(i)}
               />
             ))}
           </div>

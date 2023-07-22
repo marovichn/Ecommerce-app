@@ -50,13 +50,13 @@ width: 100%;
   white-space: nowrap;
   will-change: transform;
   animation: marquee 15s linear infinite;
-  width: 180%;
+  width: 200%;
 }
 .track:hover {
   animation-play-state: paused;
 }
 @keyframes marquee {
-  from { transform: translateX(0); }
+  from { transform: translateX(0%); }
   to { transform: translateX(-50%); }
 }
 
@@ -677,10 +677,12 @@ margin-top: 160px;
   }
   .product-detail-container{
     flex-wrap: wrap;
+    justify-content: center;
     }
   .product-detail-container .product-detail-image{
     width: 350px;
     height: 350px;
+    margin-top:25px;
   }
   .cart-container{
     width: 415px;
