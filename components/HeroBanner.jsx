@@ -2,8 +2,7 @@ import { urlFor } from "@/lib/client";
 import Link from "next/link";
 import React from "react";
 
-const HeroBanner = ({HeroBanner}) => {
-    const bannerData = HeroBanner[0];
+const HeroBanner = ({bannerData}) => {
   return (
     <div className='hero-banner-container'>
       <div>

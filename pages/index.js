@@ -4,34 +4,35 @@ import { client } from "@/lib/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
-
-export default function Home({products, bannerProducts}) {
+export default function Home({products, bannerData}) {
   return (
-    <>
-      <HeroBanner HeroBanner={bannerProducts ? bannerProducts : null}></HeroBanner>
-      <div className="products-heading">
+    <div className="p-5">
+      <HeroBanner
+        bannerData={bannerData && bannerData[0]}
+      ></HeroBanner>
+      <div className='products-heading'>
         <h2>Best Selling Products</h2>
-        <p>Speakers...</p>
       </div>
 
-      <div>
-        {products?.map(product=><Product>{product}</Product>)}
+      <div className='products-container'>
+        {products?.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
       </div>
-      <FooterBanner></FooterBanner>
-    </>
+      <FooterBanner footerBanner={bannerData && bannerData[0]}/>
+    </div>
   );
 }
 export async function getServerSideProps(){
   const query = "*[_type == 'product']";
   const products = await client.fetch(query);
   const bannerQuery = "*[_type == 'banner']";
-  const bannerProducts = await client.fetch(bannerQuery);
+  const bannerData = await client.fetch(bannerQuery);
 
   return {
     props:{
       products,
-      bannerProducts
+      bannerData
     }
   }
 }
