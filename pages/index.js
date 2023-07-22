@@ -7,7 +7,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export default function Home({products, bannerProducts}) {
-  console.log(bannerProducts)
   return (
     <>
       <HeroBanner HeroBanner={bannerProducts ? bannerProducts : null}></HeroBanner>
