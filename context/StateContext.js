@@ -100,7 +100,10 @@ let foundProduct;
         decQty,
         onAdd,
         onRemove,
-        toggleCartItemQuanitity
+        toggleCartItemQuanitity,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
       }}
     >
       {children}
