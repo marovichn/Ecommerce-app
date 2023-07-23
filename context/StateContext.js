@@ -9,6 +9,8 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+let index;
+let foundProduct;
 
   const incQty = () => {
     setQty((prevQty) => prevQty + 1);
@@ -49,6 +51,42 @@ export const StateContext = ({ children }) => {
     toast.success(`${quantity} ${product.name} added to the cart`);
   };
 
+  const onRemove=(item)=>{
+    setCartItems((prev)=>prev.filter(i=>i._id !== item._id));
+    setTotalQuantities((prev)=>prev - item.quantity);
+    setTotalPrice((prev) => prev -( item.quantity * item.price));
+  }
+
+ 
+  const toggleCartItemQuanitity = (id, value) => {
+    foundProduct = cartItems.find((item) => item._id === id);
+    index = cartItems.findIndex((product) => product._id === id);
+    const newCartItems = cartItems.filter((item) => item._id !== id);
+
+    if (value === "inc") {
+      /* setCartItems([
+        ...newCartItems,
+        { ...foundProduct, quantity: foundProduct.quantity + 1 },
+      ]); */
+      cartItems[index].quantity = cartItems[index].quantity + 1
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
+      setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
+    } else if (value === "dec") {
+      if (foundProduct.quantity > 1) {
+        /* setCartItems([
+          ...newCartItems,
+          { ...foundProduct, quantity: foundProduct.quantity - 1 },
+        ]); */
+        cartItems[index].quantity = cartItems[index].quantity - 1;
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
+      }else{
+        onRemove(foundProduct);
+      }
+    }
+  };
+
+
   return (
     <Context.Provider
       value={{
@@ -60,7 +98,9 @@ export const StateContext = ({ children }) => {
         qty,
         incQty,
         decQty,
-        onAdd
+        onAdd,
+        onRemove,
+        toggleCartItemQuanitity
       }}
     >
       {children}
