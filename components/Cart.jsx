@@ -35,7 +35,6 @@ const Cart = () => {
      toast.loading("Redirecting...");
 
      stripe.redirectToCheckout({ sessionId: data.id });
-     localStorage.setItem("checkouted", true);
    };
 
   return (
