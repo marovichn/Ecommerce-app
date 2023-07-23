@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 import {AiOutlineShopping} from "react-icons/ai"
 import Cart from './Cart';
 import Link from 'next/link';
+import { useStateContext } from '@/context/StateContext';
 
 const Navbar = () => {
-const [showCart, setShowCart]=useState(false);
+  const {showCart, setShowCart, totalQuantities}=useStateContext();
 
   return (
     <div className='navbar-container'>
@@ -17,10 +18,10 @@ const [showCart, setShowCart]=useState(false);
       <button
         type='button'
         className='cart-icon'
-        onClick={() =>setShowCart(prev=>!prev)}
+        onClick={() =>setShowCart((prev)=>!prev)}
       >
         <AiOutlineShopping />
-        <span className='cart-item-qty -mt-3'>0</span>
+        <span className='cart-item-qty -mt-3'>{totalQuantities}</span>
       </button>
 
       {showCart && <Cart />}
