@@ -1,11 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { BsBagCheckFill } from "react-icons/bs";
 
 import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "../lib/utils";
+import { useRouter } from "next/router";
 
 const Success = () => {
+  const [unauth, setUnauth] = useState(true);
+  //routing protection (weak) w/o session
+  const router = useRouter();
+  useEffect(() => {
+    if (!localStorage.getItem("checkouted")) router.push("/");
+    setUnauth(true);
+  }, []);
+
+  if (unauth) return;
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
   useEffect(() => {

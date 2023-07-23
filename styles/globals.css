@@ -763,3 +763,12 @@ margin-top: 160px;
   margin: auto;
 }
 }
+
+.black{
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  width: 200vw;
+  height: 200vh;
+  z-index: 9999;
+}
